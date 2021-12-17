@@ -65,7 +65,7 @@ function startQuiz() {
         
         setTimeout(quizQuestion6, 1000);
         function quizQuestion6 (){
-            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " +count; "<br><p>Enter Initials <input></input>" 
+            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><p>Enter Initials</p> <input>" 
         }
 
     }
@@ -216,7 +216,7 @@ function checkQuizz3(clickedEl){
         
         setTimeout(quizQuestion6, 1000);
         function quizQuestion6 (){
-            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " +count; "<br><p>Enter Initials <input></input>" 
+            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><p>Enter Initials</p> <input> "
     
         //remove previous correct or wrong message
         if (wrong.parentNode) {
