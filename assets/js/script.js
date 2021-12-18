@@ -18,7 +18,7 @@ var count = 75;
 var correct = document.createTextNode("Correct!")
 var wrong = document.createTextNode("Wrong!")
 
-
+//local storage
 
 //quiz questions and answers
 var quizQuestions = [
@@ -61,16 +61,49 @@ function startQuiz() {
             count = 0;
             clearInterval(timeCheck);
 
-    //change to HIGHSCORE page
-        
-        setTimeout(quizQuestion6, 1000);
-        function quizQuestion6 (){
-            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><p>Enter Initials</p> <input>" 
+   
+// If timer is 0 go to end of the quiz  
+//change to FINAL SCORE page 
+    
+   setTimeout(quizQuestion6, 1000);
+   function quizQuestion6 (){
+       document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><br>Enter Initials: <input id='initials'></input><br><br><button id='submit'>Submit</button>"
+       
+       // stop timer when quiz finished
+       clearInterval(timeCheck);
+   //remove previous correct or wrong message
+   if (wrong.parentNode) {
+       wrong.parentNode.removeChild(wrong);
+     }
+     if (correct.parentNode) {
+       correct.parentNode.removeChild(correct);
+     }
+
+   document.getElementById('submit').addEventListener('click', quizQuestion7);
+
+     //change to HIGHSCORE page
+
+   function quizQuestion7 (){
+       var storeInitial =  document.getElementById('initials').value;
+       document.getElementById("quiz-section").innerHTML = "<h1>High Scores</h1><br><p>1. " + storeInitial  + ' ' + count + "<br><br><button id='go-back'>Go back</button><button id='clear-high-scores'>Clear high scores</button>"
+       
+       // stop timer when quiz finished
+       clearInterval(timeCheck);
+   //remove previous correct or wrong message
+   if (wrong.parentNode) {
+       wrong.parentNode.removeChild(wrong);
+     }
+     if (correct.parentNode) {
+       correct.parentNode.removeChild(correct);
+     }
+   }
         }
 
     }
         
-        
+     
+    
+
     // Update the text on the HTML page
     timer.textContent = "Time: " + count;
 
@@ -85,7 +118,7 @@ function startQuiz() {
             document.getElementById("quiz-section").innerHTML = "<h1>Commonly used data types DO NOT include:</h1><br><button class='quiz-button1'>strings</button><button class='quiz-button1'>booleans</button><button class='quiz-button1'>alerts</button><button class='quiz-button1'>numbers</button>"
         }
 
-};
+}
 
 //create click handler event
 function clickHandler(event){
@@ -208,16 +241,20 @@ function checkQuizz3(clickedEl){
     function checkQuizz5(clickedEl){
         if(clickedEl.textContent === quizQuestions[4].answer){
             document.body.append(correct)
+        
         } else {
             document.body.append(wrong)
             count-=10;
+            
         }
-        //change to HIGHSCORE page
-        
+        //change to FINAL SCORE page
+    
         setTimeout(quizQuestion6, 1000);
         function quizQuestion6 (){
-            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><p>Enter Initials</p> <input> "
-    
+            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><br>Enter Initials: <input id='initials'></input><br><br><button id='submit'>Submit</button>"
+            
+            // stop timer when quiz finished
+            clearInterval(timeCheck);
         //remove previous correct or wrong message
         if (wrong.parentNode) {
             wrong.parentNode.removeChild(wrong);
@@ -226,8 +263,39 @@ function checkQuizz3(clickedEl){
             correct.parentNode.removeChild(correct);
           }
 
+        document.getElementById('submit').addEventListener('click', quizQuestion7);
 
+          //change to HIGHSCORE page
+     
+        function quizQuestion7 (){
+            var storeInitial =  document.getElementById('initials').value;
+            document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + `${storeInitial}: ${count}` + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
+
+            if (count && storeInitial){
+                localStorage.setItem(count, storeInitial);
+            }
+
+            document.getElementById('reset').addEventListener('click', function clearHighScore(){
+                localStorage.clear();
+            })
+
+            document.getElementById('back').addEventListener('click', function goback(){
+                location.reload();
+            })
+            
+            // stop timer when quiz finished
+            clearInterval(timeCheck);
+        //remove previous correct or wrong message
+        if (wrong.parentNode) {
+            wrong.parentNode.removeChild(wrong);
+          }
+          if (correct.parentNode) {
+            correct.parentNode.removeChild(correct);
+          }
         }
+
     }
+        }
+        
 
 bodyEl.addEventListener("click",clickHandler);
