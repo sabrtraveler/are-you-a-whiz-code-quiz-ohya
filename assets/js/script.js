@@ -57,6 +57,8 @@ function startQuiz() {
     //timer going down from 75 seconds to 0
         timeCheck = setInterval(function() {
             document.getElementById("timer").innerHTML = count--;
+
+
         
         if (count ===0 || count < 0 ){   
             count = 0;
@@ -64,39 +66,73 @@ function startQuiz() {
 
    
 // If timer is 0 go to end of the quiz  
-//change to FINAL SCORE page
+        //change to FINAL SCORE page
     
-setTimeout(quizQuestion6, 1000);
-function quizQuestion6 (){
-    document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><br>Enter Initials: <input id='initials'></input><br><br><button id='submit'>Submit</button>"
-    
-    // stop timer when quiz finished
-    clearInterval(timeCheck);
-//remove previous correct or wrong message
-if (wrong.parentNode) {
-    wrong.parentNode.removeChild(wrong);
-  }
-  if (correct.parentNode) {
-    correct.parentNode.removeChild(correct);
-  }
+        setTimeout(quizQuestion6, 1000);
+        function quizQuestion6 (){
+            document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><br>Enter Initials: <input id='initials'></input><br><br><button id='submit'>Submit</button>"
+            
+            // stop timer when quiz finished
+            clearInterval(timeCheck);
+        //remove previous correct or wrong message
+        if (wrong.parentNode) {
+            wrong.parentNode.removeChild(wrong);
+          }
+          if (correct.parentNode) {
+            correct.parentNode.removeChild(correct);
+          }
 
-document.getElementById('submit').addEventListener('click', quizQuestion7);
+        document.getElementById('submit').addEventListener('click', quizQuestion7);
 
+        
 
+          //change to HIGHSCORE page 
+        
+        function quizQuestion7(){
+            var storeInitial =  document.getElementById('initials').value;
+            highScores = JSON.parse(localStorage.getItem('highscores'));
+            var ScoreObj = {User: storeInitial, Score: count};
+            localStorage.setItem('highscores', JSON.stringify(ScoreObj));
+        console.log(highScores);
+         
+            document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + "Username: " + ScoreObj.User + " " + " Score: " + ScoreObj.Score + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
+         
 
-  //change to HIGHSCORE page 
+            document.getElementById('reset').addEventListener('click', function clearHighScore(){
+                localStorage.clear();
+            })
 
-function quizQuestion7(){
-
-    highScores = JSON.parse(localStorage.getItem('highscores'));
+            document.getElementById('back').addEventListener('click', function goback(){
+                location.reload();
+                count= 75;
+            })
+            
+        // stop timer when quiz finished
+            clearInterval(timeCheck);
+        //remove previous correct or wrong message
+        if (wrong.parentNode) {
+            wrong.parentNode.removeChild(wrong);
+          }
+          if (correct.parentNode) {
+            correct.parentNode.removeChild(correct);
+          }
+}
+ //change to HIGHSCORE page 
+        
+ function quizQuestion7(){
     var storeInitial =  document.getElementById('initials').value;
-    localStorage.setItem('highscores', JSON.stringify([{finalTimer: count, userInitial: storeInitial}]));
-    document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + highScores + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
-
-
+    highScores = JSON.parse(localStorage.getItem('highscores'));
+    var ScoreObj = {User: storeInitial, Score: count};
+    localStorage.setItem('highscores', JSON.stringify(ScoreObj));
+console.log(highScores);
+ 
+    document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + "Username: " + ScoreObj.User + " " + " Score: " + ScoreObj.Score + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
+ 
 
     document.getElementById('reset').addEventListener('click', function clearHighScore(){
         localStorage.clear();
+        location.reload();
+        count= 75;
     })
 
     document.getElementById('back').addEventListener('click', function goback(){
@@ -114,6 +150,7 @@ if (wrong.parentNode) {
     correct.parentNode.removeChild(correct);
   }
 }
+    
 
         }
 
@@ -297,6 +334,8 @@ function checkQuizz3(clickedEl){
 
             document.getElementById('reset').addEventListener('click', function clearHighScore(){
                 localStorage.clear();
+                location.reload();
+                count= 75;
             })
 
             document.getElementById('back').addEventListener('click', function goback(){
@@ -314,6 +353,7 @@ function checkQuizz3(clickedEl){
             correct.parentNode.removeChild(correct);
           }
         }
+        
 
     }
 
