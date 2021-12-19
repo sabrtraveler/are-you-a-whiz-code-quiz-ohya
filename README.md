@@ -10,10 +10,10 @@ Thee quiz checks has the following features:<br>
 <li>At the end of the quiz or when the timer reaches 0 - the time left that equals the users final score. <br>
 <li>At the end of the quiz the user is able to type their initials and save their highscore.<br><br>
 The following images shows the web application's appearance and functionality:<br><br> 
-  <img src="./assets/images/1.png" style="width: 50%; max-width: 50%;">
-  <img src="./assets/images/2.png" style="width: 50%; max-width: 50%;">
-  <img src="./assets/images/3.png" style="width: 50%; max-width: 50%;">
-  <img src="./assets/images/4.png" style="width: 50%; max-width: 50%;">
-  <img src="./assets/images/5.png" style="width: 50%; max-width: 50%;">
-  <img src="./assets/images/6.png" style="width: 50%; max-width: 50%;">
+  <img src="./assets/images/1.png" style="width: 50%; max-width: 50%; max-height:50%;">
+  <img src="./assets/images/2.png" style="width: 50%; max-width: 50%; max-height:50%;">
+  <img src="./assets/images/3.png" style="width: 50%; max-width: 50%; max-height:50%;">
+  <img src="./assets/images/4.png" style="width: 50%; max-width: 50%; max-height:50%;">
+  <img src="./assets/images/5.png" style="width: 50%; max-width: 50%; max-height:50%;">
+  <img src="./assets/images/6.png" style="width: 50%; max-width: 50%; max-height:50%;">
 
