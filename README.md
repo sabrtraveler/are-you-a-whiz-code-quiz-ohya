@@ -2,8 +2,8 @@
 
 Link to deployment: https://sabrtraveler.github.io/are-you-a-whiz-code-quiz-ohya/<br>
 
-This challenge of the bootcamp was to create a quiz that allows a user to store their high score in the local host.<br><br>
-Thee quiz checks has the following features:<br>
+This challenge involved making a quiz that allows a user to store their high score in the local host.<br><br>
+The quiz has the following features:<br>
 
 <li>If the user selects the wrong quiz answer there is a message that shows "Correct!" or "Wrong!".<br>
 <li>As soon as the quiz starts - the timer starts at 75 seconds and goes down by every 1 second.<br>
