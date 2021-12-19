@@ -39,7 +39,8 @@ button {
     min-width: 150px;
     min-height: 80px;
 }
-button:hover {
+button:hover,
+h3:hover {
     opacity: 50%;
     cursor: pointer;
 }

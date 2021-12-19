@@ -15,10 +15,11 @@
 //universal variables
 var bodyEl = document.querySelector("body");
 var count = 75;
-var correct = document.createTextNode("Correct!")
-var wrong = document.createTextNode("Wrong!")
+var correct = document.createTextNode("Correct!");
+var wrong = document.createTextNode("Wrong!");
 
 //local storage
+
 
 //quiz questions and answers
 var quizQuestions = [
@@ -63,40 +64,57 @@ function startQuiz() {
 
    
 // If timer is 0 go to end of the quiz  
-//change to FINAL SCORE page 
+//change to FINAL SCORE page
     
-   setTimeout(quizQuestion6, 1000);
-   function quizQuestion6 (){
-       document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><br>Enter Initials: <input id='initials'></input><br><br><button id='submit'>Submit</button>"
-       
-       // stop timer when quiz finished
-       clearInterval(timeCheck);
-   //remove previous correct or wrong message
-   if (wrong.parentNode) {
-       wrong.parentNode.removeChild(wrong);
-     }
-     if (correct.parentNode) {
-       correct.parentNode.removeChild(correct);
-     }
+setTimeout(quizQuestion6, 1000);
+function quizQuestion6 (){
+    document.getElementById("quiz-section").innerHTML = "<h1>ALL DONE!</h1><br><p>Your final score is " + count + "<br><br>Enter Initials: <input id='initials'></input><br><br><button id='submit'>Submit</button>"
+    
+    // stop timer when quiz finished
+    clearInterval(timeCheck);
+//remove previous correct or wrong message
+if (wrong.parentNode) {
+    wrong.parentNode.removeChild(wrong);
+  }
+  if (correct.parentNode) {
+    correct.parentNode.removeChild(correct);
+  }
 
-   document.getElementById('submit').addEventListener('click', quizQuestion7);
+document.getElementById('submit').addEventListener('click', quizQuestion7);
 
-     //change to HIGHSCORE page
 
-   function quizQuestion7 (){
-       var storeInitial =  document.getElementById('initials').value;
-       document.getElementById("quiz-section").innerHTML = "<h1>High Scores</h1><br><p>1. " + storeInitial  + ' ' + count + "<br><br><button id='go-back'>Go back</button><button id='clear-high-scores'>Clear high scores</button>"
-       
-       // stop timer when quiz finished
-       clearInterval(timeCheck);
-   //remove previous correct or wrong message
-   if (wrong.parentNode) {
-       wrong.parentNode.removeChild(wrong);
-     }
-     if (correct.parentNode) {
-       correct.parentNode.removeChild(correct);
-     }
-   }
+
+  //change to HIGHSCORE page 
+
+function quizQuestion7(){
+
+    highScores = JSON.parse(localStorage.getItem('highscores'));
+    var storeInitial =  document.getElementById('initials').value;
+    localStorage.setItem('highscores', JSON.stringify([{finalTimer: count, userInitial: storeInitial}]));
+    document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + highScores + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
+
+
+
+    document.getElementById('reset').addEventListener('click', function clearHighScore(){
+        localStorage.clear();
+    })
+
+    document.getElementById('back').addEventListener('click', function goback(){
+        location.reload();
+        count= 75;
+    })
+    
+// stop timer when quiz finished
+    clearInterval(timeCheck);
+//remove previous correct or wrong message
+if (wrong.parentNode) {
+    wrong.parentNode.removeChild(wrong);
+  }
+  if (correct.parentNode) {
+    correct.parentNode.removeChild(correct);
+  }
+}
+
         }
 
     }
@@ -107,8 +125,6 @@ function startQuiz() {
     // Update the text on the HTML page
     timer.textContent = "Time: " + count;
 
-    // Update the local storage to the new time
-    localStorage.setItem("time", count);
 
         }, 1000);
 
@@ -265,15 +281,19 @@ function checkQuizz3(clickedEl){
 
         document.getElementById('submit').addEventListener('click', quizQuestion7);
 
-          //change to HIGHSCORE page
-     
-        function quizQuestion7 (){
-            var storeInitial =  document.getElementById('initials').value;
-            document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + `${storeInitial}: ${count}` + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
+        
 
-            if (count && storeInitial){
-                localStorage.setItem(count, storeInitial);
-            }
+          //change to HIGHSCORE page 
+        
+        function quizQuestion7(){
+            var storeInitial =  document.getElementById('initials').value;
+            highScores = JSON.parse(localStorage.getItem('highscores'));
+            var ScoreObj = {User: storeInitial, Score: count};
+            localStorage.setItem('highscores', JSON.stringify(ScoreObj));
+        console.log(highScores);
+         
+            document.getElementById("quiz-section").innerHTML = "<h1>HIGHSCORES</h1>" + "Username: " + ScoreObj.User + " " + " Score: " + ScoreObj.Score + "<br><button id='reset'>Clear High Scores</button><button id='back'>Go Back</button>";
+         
 
             document.getElementById('reset').addEventListener('click', function clearHighScore(){
                 localStorage.clear();
@@ -281,9 +301,10 @@ function checkQuizz3(clickedEl){
 
             document.getElementById('back').addEventListener('click', function goback(){
                 location.reload();
+                count= 75;
             })
             
-            // stop timer when quiz finished
+        // stop timer when quiz finished
             clearInterval(timeCheck);
         //remove previous correct or wrong message
         if (wrong.parentNode) {
@@ -295,7 +316,7 @@ function checkQuizz3(clickedEl){
         }
 
     }
-        }
-        
+
+}
 
 bodyEl.addEventListener("click",clickHandler);
